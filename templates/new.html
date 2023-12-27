@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ new.title | truncatewords:2 }}{% endblock title %}
+{% block content %}
+
+     <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h3>{{ new.title }}</h3>
+                <h5>{{ new.publish_time }}</h5>
+                <img src="{{ new.image.url }}"style="width: 50%; height: 300px">
+                <p>{{ new.text }}</p>
+            </div>
+        </div>
+        </div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mahalliy yangiliklar{% endblock title %}
+
+{% block content %}
+
+    {% for local in localNews %}
+        <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{ local.get_absolute_url }}">
+                <h3>{{ local.title }}</h3>
+                <h5>{{ local.publish_time }}</h5>
+                <img src="{{ local.image.url }}"style="width: 400px; height: 300px">
+                </a>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
