@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ Login }}{% endblock title %}
+
+{% block content %}
+    <h2>Logout</h2>
+    <a href="{% url 'login' %}">Login</a>
+
+{% endblock content %}

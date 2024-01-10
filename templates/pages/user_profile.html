@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Account{% endblock title %}
+{% block content %}
+    <h2>Xush kelibsiz {{ user.username }}</h2>
+    <a href="{% url 'logout' %}">Log out</a>
+    {% if profile.photo %}
+    <img src="{{ profile.photo.url }}" style="width: 200px; height: 200px">
+{% else %}
+    {# Display a placeholder image or message #}
+{% endif %}
+    <p>{{ user.username }}</p>
+    <p>{{ user.first_name }}</p>
+    <p>{{ user.email }}</p>
+    <a href="{% url 'account_edit' %}">Edit</a>
+    <p><a href="{% url 'change_password' %}">Change password</a> </p>
+{% endblock content %}

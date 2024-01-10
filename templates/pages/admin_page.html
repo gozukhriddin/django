@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin sahifasi{% endblock title %}
+
+{% block content %}
+
+    <h1>Barcha adminlar</h1>
+    <table class="table table-bordered table-responsive table-striped">
+    <tr>
+        <td>Username</td>
+        <td>Ismi</td>
+        <td>Familyasi</td>
+{#        <td>Tug'ilgan yili</td>#}
+{#        <td>Rasmi</td>#}
+    </tr>
+    {% for user in admin %}
+    <tr>
+      <th>{{ user.username}}</th>
+      <th>{{ user.first_name}}</th>
+      <th>{{ user.last_name}}</th>
+{#      <th>{% if profile.photo %}{{ profile.date_birth}}{% endif %} </th>#}
+{#    <th><img src="{% if profile.photo %}{{ profile.photo.url }}{% endif %}" style="width: 150px; height: 150px"></th>#}
+{##}
+
+    </tr>
+    {% endfor %}
+    </table>
+
+{% endblock content %}

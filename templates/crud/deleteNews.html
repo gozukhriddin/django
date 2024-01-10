@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Joriy sahifani o'chirish{% endblock title %}
+{% block content %}
+
+     <div class="container">
+        <div class="row">
+            <h2 class="text-danger">Joriy sahifani o'chirmoqchimisiz</h2>
+            <form method="post">{% csrf_token %}
+                <h3>{{ new.title | truncatewords:3 }} nomli sahifanin o'chirish</h3>
+                <button type="submit" class="btn btn-danger">O'chirish</button>
+            </form>
+        </div>
+        </div>
+{% endblock content %}

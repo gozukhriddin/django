@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load hitcount_tags %}
+{% load myfilter %}
+{% load i18n %}
 
-{% block title %}Home{% endblock title%}
+{% block title %}
+    {% blocktrans %}Bosh sahifa{% endblocktrans %}
+{% endblock title%}
 {% block content %}
-    <div class="latest_newsarea"> <span>Latest News</span>
+    <div class="latest_newsarea"> <span>
+        {% blocktrans %}So'ngi yangiliklar{% endblocktrans %}</span>
       <ul id="ticker01" class="news_sticker">
           {% for new in news %}
         <li><a href="{{ new.get_absolute_url }}">{{ new.title | truncatewords:4 }}</a></li>
@@ -16,7 +22,8 @@
         <div class="signle_iteam"> <img style="height: 300px" src="{{new.image.url }} " alt="">
           <div class="sing_commentbox slider_comntbox">
             <p><i class="fa fa-calendar"></i>{{ new.publish_time }}</p>
-            <a href="#"><i class="fa fa-comments"></i>20 Comments</a></div>
+            <a href="#"><i class="fa fa-comments"></i>{{ news_comments|get_item:new.id }}{% blocktrans %}Izohlar{% endblocktrans %}</a></div>
+            <span>{% blocktrans %}Ko'rilganlar soni{% endblocktrans %}{% get_hit_count for new %}</span>
           <a class="slider_tittle" href="{{ new.get_absolute_url }}">{{ new.title | truncatewords:8 }}</a></div>
           {% endfor %}
       </div>
@@ -68,7 +75,7 @@
                 </div>
               </div>
               <div class="single_category wow fadeInDown">
-                <div class="category_title"> <a href="pages/category-archive.html">Category 1</a></div>
+                <div class="category_title"> <a href="pages/category-archive.html">{%blocktrans %}Kategoriya 1{% endblocktrans %}</a></div>
                 <div class="single_category_inner">
                   <ul class="catg_nav">
                     <li>
@@ -103,7 +110,7 @@
                 </div>
               </div>
               <div class="single_category  wow fadeInDown">
-                <div class="category_title"> <a href="pages/category-archive.html">Category 2</a></div>
+                <div class="category_title"> <a href="pages/category-archive.html">{% blocktrans %}Category 2{% endblocktrans %}</a></div>
                 <div class="single_category_inner">
                   <ul class="catg_nav catg_nav2">
                     <li>

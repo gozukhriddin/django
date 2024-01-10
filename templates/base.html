@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,21 +36,43 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav custom_nav">
-                <li><a href="{% url 'home_page' %}">Home</a></li>
-                <li><a href="{% url 'local_news' %}">Mahalliy</a></li>
-                <li><a href="pages/category-archive.html">Archive</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li><a href="pages/404.html">404 Page</a></li>
+                <li><a href="{% url 'home_page' %}">{% blocktrans %}Bosh sahifa{% endblocktrans %}</a></li>
+                <li><a href="{% url 'local_news' %}">{% blocktrans %}Mahalliy{% endblocktrans %}</a></li>
+                <li><a href="pages/category-archive.html">{% blocktrans %}Arxiv{% endblocktrans %}</a></li>
+                <li><a href="{% url 'contact' %}">{% blocktrans %}Biz bilan bog'lanish{% endblocktrans %}</a></li>
+                <li><a href="pages/404.html">{% blocktrans %}404 sahifa{% endblocktrans %}</a></li>
               </ul>
+                <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go">
+</form>
             </div>
           </div>
         </nav>
+          <div style="margin-top:10px">
+              {% if request.user.is_authenticated %}
+            <a href="{% url 'user_profile' %}" class="text-light">My profile</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="text-light">Login</a>
+            <a href="{% url 'sign-up' %}" class="text-light">Ro'yxatdan o'tish</a>
+            {% endif %}</div>
         <div class="header_search">
+
           <button id="searchIcon"><i class="fa fa-search"></i></button>
           <div id="shide">
             <div id="search-hide">
-              <form action="#">
-                <input type="text" size="40" placeholder="Search here ...">
+              <form action="{% url 'search' %}" method="get">{% csrf_token %}
+                <input type="search" size="40" placeholder="Search here ..." name="q" >
               </form>
               <button class="remove"><span><i class="fa fa-times"></i></span></button>
             </div>

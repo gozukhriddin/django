@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Qidiruv natijalari{% endblock title %}
+
+{% block content %}
+
+    <h2>Qidiruv natijalari</h2>
+    {% for new in allnews %}
+        <span>
+        <h3><a href="{% url 'newdetail' new.slug %}" class="text-danger">{{ new.title }}</a> </h3>
+        <p><img src="{{ new.image.url }}" width="30%"></p>
+        <p>{{ new.text | truncatewords:30 }}</p>
+        </span>
+
+    {% endfor %}
+{% endblock content %}

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -58,3 +59,21 @@ class ContactForm(models.Model):
         return self.email
 
 # Create your models here.
+
+
+class Comment(models.Model):
+    new=models.ForeignKey(Newa,
+                           on_delete=models.CASCADE,
+                           related_name='comments')
+    user=models.ForeignKey(User,
+                           on_delete=models.CASCADE,
+                           related_name='comments')
+    body=models.TextField()
+    created=models.DateTimeField(auto_now_add=True)
+    is_activ=models.BooleanField(default=False)
+
+    class Meta:
+        ordering=['-created']
+
+    def __str__(self):
+        return f"Commment {self.body} by {self.user}"
